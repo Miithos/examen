@@ -45,7 +45,11 @@ export class ClientesComponent implements OnInit {
   }
 
   public clienteNuevo() {
-    this.router.navigate(['/crea']);
+    this.router.navigate(['/clientes/nuevo']);
+  }
+
+  public editarcliente(id) {
+    this.router.navigate(['/clientes/editar/'+id]);
   }
 
 }

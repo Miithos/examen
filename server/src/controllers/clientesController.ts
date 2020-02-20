@@ -49,6 +49,11 @@ class ClientesController {
         res.json({mensaje: 'Cliente Actualizado'});
     }
 
+    public async last(req: Request, res: Response) {
+        const id = await pool.then((r: any) => r.query('SELECT id FROM clientes ORDER BY id DESC LIMIT 1'));
+        res.json(id);
+    }
+
 }
 
 export const clientesController = new ClientesController();

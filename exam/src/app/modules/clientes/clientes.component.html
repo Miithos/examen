@@ -24,9 +24,7 @@
                     <td>{{row.id}}</td>
                     <td>{{row.nombre}}</td>
                     <td> 
-                        <button class="btn btn-default" > 
-                            
-                        </button>
+                        <button type="button" class="btn btn-primary" (click)="editarcliente(row.id)">Editar</button>
                     </td>
                 </tr>
             </tbody>

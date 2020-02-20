@@ -16,6 +16,8 @@ class ClientesRoutes {
         this.router.post('/', clientesController.create);
         this.router.delete('/:id', clientesController.delete);
         this.router.put('/:id', clientesController.update);
+        this.router.get('/get/last', clientesController.last);
+
     }
 }
 

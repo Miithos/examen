@@ -13,57 +13,49 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class ClientesController {
+class ArticulosController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const clientes = yield database_1.default.then((r) => r.query('SELECT * FROM clientes'));
-            res.json(clientes);
+            const articulos = yield database_1.default.then((r) => r.query('SELECT * FROM articulos'));
+            res.json(articulos);
         });
     }
     consulta(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const cliente = yield database_1.default.then((r) => r.query('SELECT * FROM clientes WHERE id = ?', [id]));
-            if (cliente.length > 0) {
-                return res.json(cliente[0]);
+            const articulo = yield database_1.default.then((r) => r.query('SELECT * FROM articulos WHERE articulo = ?', [id]));
+            if (articulo.length > 0) {
+                return res.json(articulo[0]);
             }
-            res.status(404).json({ mensaje: "el cliente no existe" });
+            res.status(404).json({ mensaje: "El articulo no existe" });
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id, nombre, appaterno, apmaterno, rfc } = req.body;
+            const { opcion, articulo, descripcion, modelo, precio, existencia } = req.body;
             const query = `
-            CALL clienteEdit(?, ?, ?, ?, ?);
+            CALL articuloEdit(?, ?, ?, ?, ?, ?);
         `;
-            yield database_1.default.then((r) => r.query(query, [id, nombre, appaterno, apmaterno, rfc]));
-            res.json({ mensaje: 'Cliente guardado' });
-        });
-    }
-    delete(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.then((r) => r.query('DELETE FROM clientes WHERE id = ?', [id]));
-            res.json({ mensaje: 'Cliente Eliminado' });
+            yield database_1.default.then((r) => r.query(query, [opcion, articulo, descripcion, modelo, precio, existencia]));
+            res.json({ mensaje: 'Bien Hecho. El Articulo ha sido registrado correctamente' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nombre, appaterno, apmaterno, rfc } = req.body;
-            const { id } = req.params;
+            const { opcion, articulo, descripcion, modelo, precio, existencia } = req.body;
             const query = `
-            CALL clienteEdit(?, ?, ?, ?, ?);
+            CALL articuloEdit(?, ?, ?, ?, ?, ?);
         `;
-            yield database_1.default.then((r) => r.query(query, [id, nombre, appaterno, apmaterno, rfc]));
-            res.json({ mensaje: 'Cliente Actualizado' });
+            yield database_1.default.then((r) => r.query(query, [opcion, articulo, descripcion, modelo, precio, existencia]));
+            res.json({ mensaje: 'Articulo Actualizado' });
         });
     }
     last(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id = yield database_1.default.then((r) => r.query('SELECT id FROM clientes ORDER BY id DESC LIMIT 1'));
-            res.json(id);
+            const articulos = yield database_1.default.then((r) => r.query('SELECT articulo FROM articulos ORDER BY articulo DESC LIMIT 1'));
+            res.json(articulos);
         });
     }
 }
-exports.clientesController = new ClientesController();
-exports.default = exports.clientesController;
+exports.articulosController = new ArticulosController();
+exports.default = exports.articulosController;

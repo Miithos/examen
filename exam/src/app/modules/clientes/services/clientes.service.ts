@@ -29,6 +29,10 @@ export class ClientesService {
   }
 
   actualizarCliente(id: number, data: any){
-    return this.http.post(`${this.api}/clientes/${id}`, data);
+    return this.http.put(`${this.api}/clientes/${id}`, data);
+  }
+
+  lastCliente(){
+    return this.http.get(`${this.api}/clientes/get/last`);
   }
 }

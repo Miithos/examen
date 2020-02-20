@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ClientesComponent } from './clientes.component';
+import { ModalModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
 
 import { ClientesService } from './services/clientes.service';
+
+import { ClientesComponent } from './clientes.component';
+
 import { ClientesaltaComponent } from './clientesalta/clientesalta.component';
 import { ClientesRoutingModule } from './clientes-routing.module';
 
@@ -13,10 +16,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [ClientesComponent,ClientesaltaComponent],
   imports: [
     CommonModule,
-    ClientesService,
     FormsModule, 
+    ReactiveFormsModule,
     ClientesRoutingModule,
-    ReactiveFormsModule
-  ]
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    
+  ],
+  providers: [ClientesService]
 })
 export class ClientesModule { }
