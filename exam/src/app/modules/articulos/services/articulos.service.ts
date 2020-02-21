@@ -10,7 +10,7 @@ export class ArticulosService {
   api: any;
 
   constructor(private http: HttpClient) {
-    this.api = 'http://localhost:3000/api';
+    this.api = 'http://165.22.100.252:3000/api';
   }
 
   getArticulos() {
